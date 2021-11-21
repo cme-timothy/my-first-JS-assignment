@@ -5,64 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman</title>
-    <script>
-        const hangManWordList = [
-            "Programmering", 
-            "Stockholm", 
-            "Studenter", 
-            "Javascript", 
-            "Afterwork"
-        ];
-
-        /* a function to generate a random hangman word from a list of words */
-        let hangManWord = [];
-        function randomWord(wordList) {
-            let randomNumber;
-
-            do {
-                randomNumber = Math.floor((Math.random() * 10) + 1);
-            } while (randomNumber !== 1 && randomNumber !== 2 && randomNumber !== 3 && randomNumber !== 4 && randomNumber !== 5);
-            
-            return hangManWord = wordList[randomNumber - 1];
-        }
-
-        randomWord(hangManWordList);
-        console.log(hangManWord);
-
-        /* the random generated hangman word changed into a list of letters */
-        const hangManLetters = [];
-        for (let i = 0; i < hangManWord.length; i++) {
-            hangManLetters.push(hangManWord[i]);
-        }
-
-        /* all letters replaced with underscore */
-        const hangManBlank = [];
-        for (let i = 0; i < hangManLetters.length; i++) {
-            hangManBlank[i] = "_";
-        }
-
-        do {
-            let lives = 5;
-            let letterGuess = prompt(`      
-            ${hangManBlank}
-
-            Lives left: ${lives}
-            `);
-
-            if (letterGuess === null) {
-                break;
-            }
-
-            for (let i = 0; i < hangManLetters.length; i++) {
-                if (letterGuess === hangManLetters[i]) {
-                    hangManBlank[i] = hangManLetters[i];
-                } else if (letterGuess !== hangManLetters[i]) {
-                    lives--;
-                }
-            }
-        } while (hangManBlank !== hangManLetters);
-
-    </script>
+    <script src="script.js"></script>
 </head>
 <body>
     
