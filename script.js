@@ -1,8 +1,8 @@
 const hangManWordList = [
-    "Programmering", 
-    "Stockholm", 
-    "Studenter", 
-    "Javascript", 
+    "Programmering",
+    "Stockholm",
+    "Studenter",
+    "Javascript",
     "Afterwork"
 ];
 
@@ -36,14 +36,14 @@ for (let i = 0; i < hangManLetters.length; i++) {
 /* hangman game loop */
 let playing = true;
 let lives = 5;
-let wrongGuessMade = [];    
+let wrongGuessMade = [];
 do {
     /* prompt guess loop */
     let letterGuess = prompt(`      
-    ${hangManBlank.toString().replace(/,/g, " ")}
+            ${hangManBlank.toString().replace(/,/g, " ")}
 
-    Lives left: ${lives}
-    Guesses made: ${wrongGuessMade.toString().replace(/,/g, ", ")}
+            Lives left: ${lives}
+            Guesses made: ${wrongGuessMade.toString().replace(/,/g, ", ")}
     `);
 
     /* if player presses cancel game turned off */
@@ -75,9 +75,9 @@ do {
     }
 
     /* a function to determine if guess is correct */
-    let correctGuess = lowerCaseWord.find(guessRight); 
+    let correctGuess = lowerCaseWord.find(guessRight);
     function guessRight(string) {
-        return string === lowerCaseLetterGuess;  
+        return string === lowerCaseLetterGuess;
     }
 
     /* if guess is legitimate and incorrect -1 lives */
