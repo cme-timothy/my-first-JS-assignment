@@ -41,13 +41,15 @@ for (let i = 0; i < hangManLetters.length; i++) {
 
 /* hangman game loop */
 let playing = true;
-let lives = 5;        
+let lives = 5;
+let wrongGuessMade = [];    
 do {
     /* prompt guess loop */
     let letterGuess = prompt(`      
     ${hangManBlank.toString().replace(/,/g, " ")}
 
     Lives left: ${lives}
+    Guesses made: ${wrongGuessMade.toString().replace(/,/g, ", ")}
     `);
 
     /* if player presses cancel game turned off */
@@ -59,7 +61,21 @@ do {
     /* guess letter changed to lowercase letter */
     let lowerCaseLetterGuess = letterGuess.toLowerCase();
 
-    /* if guess is a correct letter than underscore letter/letters change to guessed letter */
+    /* lowercase string to ASCII conversion a-z ASCII code 97-122 */
+    let asciiConversion = letterGuess.charCodeAt(0);
+    console.log(asciiConversion);
+    let moreThanTwoLetters = letterGuess.charCodeAt(1);
+    console.log(moreThanTwoLetters);
+
+    /* if guess is different from a legitimate guess go again */
+    let correctAscii;
+    if (asciiConversion > 97 && asciiConversion < 122 && isNaN(moreThanTwoLetters)) {
+        correctAscii = true;
+    } else {
+        correctAscii = false;
+    }
+
+    /* if guess is a correct letter than hidden guessed letter is visible */
     for (let i = 0; i < hangManLetters.length; i++) {
         if (lowerCaseLetterGuess === lowerCaseWord[i]) {
             hangManBlank[i] = hangManLetters[i];
@@ -73,8 +89,9 @@ do {
     }
 
     /* if guess is incorrect -1 lives */
-    if (lowerCaseLetterGuess !== correctGuess) {
+    if (lowerCaseLetterGuess !== correctGuess && correctAscii && letterGuess !== "") {
         lives--;
+        wrongGuessMade.push(letterGuess);
     }
 
     /* if lives reach 0 game lost and turned off */
@@ -89,3 +106,5 @@ do {
         playing = false;
     }
 } while (playing);
+
+/* uppercase A-Z ASCII code 65-90 and lowercase a-z ASCII code 97-122 */
