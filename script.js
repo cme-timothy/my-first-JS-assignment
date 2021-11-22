@@ -8,18 +8,12 @@ const hangManWordList = [
 
 /* a function to generate a random hangman word from a list of words */
 let hangManWord = [];
-function randomWord(wordList) {
-    let randomNumber;
-
-    do {
-        randomNumber = Math.floor((Math.random() * 10) + 1);
-    } while (randomNumber !== 1 && randomNumber !== 2 && randomNumber !== 3 && randomNumber !== 4 && randomNumber !== 5);
-    
-    return hangManWord = wordList[randomNumber - 1];
+function randomWord(wordList, max) {
+    let randomNumber = Math.floor(Math.random() * max);
+    return hangManWord = wordList[randomNumber];
 }
 
-randomWord(hangManWordList);
-console.log(hangManWord);
+randomWord(hangManWordList, 5);
 
 /* the random generated hangman word changed into a list of letters */
 const hangManLetters = [];
@@ -61,15 +55,13 @@ do {
     /* guess letter changed to lowercase letter */
     let lowerCaseLetterGuess = letterGuess.toLowerCase();
 
-    /* lowercase string to ASCII conversion a-z ASCII code 97-122 */
-    let asciiConversion = letterGuess.charCodeAt(0);
-    console.log(asciiConversion);
-    let moreThanTwoLetters = letterGuess.charCodeAt(1);
-    console.log(moreThanTwoLetters);
+    /* lowercase string to lowercase ASCII number. ASCII conversion a-z ASCII number 97-122 */
+    let asciiConversion = lowerCaseLetterGuess.charCodeAt(0);
+    let moreThanTwoLetters = lowerCaseLetterGuess.charCodeAt(1);
 
     /* if guess is different from a legitimate guess go again */
     let correctAscii;
-    if (asciiConversion > 97 && asciiConversion < 122 && isNaN(moreThanTwoLetters)) {
+    if (asciiConversion >= 97 && asciiConversion <= 122 && isNaN(moreThanTwoLetters)) {
         correctAscii = true;
     } else {
         correctAscii = false;
@@ -88,10 +80,10 @@ do {
         return string === lowerCaseLetterGuess;  
     }
 
-    /* if guess is incorrect -1 lives */
+    /* if guess is legitimate and incorrect -1 lives */
     if (lowerCaseLetterGuess !== correctGuess && correctAscii && letterGuess !== "") {
         lives--;
-        wrongGuessMade.push(letterGuess);
+        wrongGuessMade.push(lowerCaseLetterGuess);
     }
 
     /* if lives reach 0 game lost and turned off */
@@ -106,5 +98,3 @@ do {
         playing = false;
     }
 } while (playing);
-
-/* uppercase A-Z ASCII code 65-90 and lowercase a-z ASCII code 97-122 */
